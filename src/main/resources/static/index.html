@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SignBridge — Indian Sign Language Recognition System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <div class="brand">
+    <svg class="hand-logo" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 26V13a2.4 2.4 0 0 1 4.8 0v9"/>
+      <path d="M18.8 22V9.5a2.4 2.4 0 0 1 4.8 0V22"/>
+      <path d="M23.6 22V11a2.4 2.4 0 0 1 4.8 0v11"/>
+      <path d="M28.4 22.5v-6a2.4 2.4 0 0 1 4.8 0v11c0 6-4.6 11-11 11-3.6 0-5.8-1.4-7.6-3.6L9 27.4a2.3 2.3 0 0 1 3.4-3.1l1.6 1.6"/>
+    </svg>
+    <div>SignBridge<small>ISL Recognition System</small></div>
+  </div>
+  <div class="top-actions" id="topActionsLanding">
+    <button class="btn btn-ghost" onclick="openAuth('login')">Log in</button>
+    <button class="btn btn-primary" onclick="openAuth('register')">Register</button>
+  </div>
+  <div class="top-actions hidden" id="topActionsDash">
+    <span class="mono" style="font-size:12px;color:var(--ink-soft);">Signed in as <strong id="topUserName">demo_user</strong></span>
+    <button class="btn btn-ghost" onclick="logOut()">Log out</button>
+  </div>
+</div>
+ 
+<!-- ============ LANDING ============ -->
+<div id="landing">
+  <section class="hero">
+    <div>
+      <h1 class="fade-up d1">Speak with your hands.<br>Read the reply anywhere.</h1>
+      <p class="lede fade-up d2">SignBridge turns Indian Sign Language into text in real time, and turns typed words into signs back — so a conversation works both ways, on one shared screen.</p>
+      <div class="cta-row fade-up d3">
+        <button class="btn btn-primary" onclick="openAuth('register')">Get started free</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">See what it does</button>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="palm-big" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 26V13a2.4 2.4 0 0 1 4.8 0v9"/><path d="M18.8 22V9.5a2.4 2.4 0 0 1 4.8 0V22"/><path d="M23.6 22V11a2.4 2.4 0 0 1 4.8 0v11"/><path d="M28.4 22.5v-6a2.4 2.4 0 0 1 4.8 0v11c0 6-4.6 11-11 11-3.6 0-5.8-1.4-7.6-3.6L9 27.4a2.3 2.3 0 0 1 3.4-3.1l1.6 1.6"/></svg>
+      <div class="caption-card c1">🖐️ → "Thank you"</div>
+      <div class="caption-card c2">✍️ → shown as sign</div>
+      <div class="caption-card c3">⏱ 0.4s response</div>
+    </div>
+  </section>
+ 
+  <section class="feature-strip" id="features">
+    <div class="feature-card">
+      <div class="badge teal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
+      </div>
+      <h3>Camera Translate</h3>
+      <p>Sign in front of the camera, get spoken-language text instantly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="badge saffron">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/></svg>
+      </div>
+      <h3>Text Chat</h3>
+      <p>Anyone who can type can reply directly — no sign knowledge needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="badge outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1v13c3-1 6-.5 8 1 2-1.5 5-2 8-1V5c-3-1-6-.5-8 1z"/><line x1="12" y1="6" x2="12" y2="19"/></svg>
+      </div>
+      <h3>Phrase Library</h3>
+      <p>Everyday lines like "I've eaten" or "What do you want?" — one tap away.</p>
+    </div>
+    <div class="feature-card">
+      <div class="badge coral">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg>
+      </div>
+      <h3>Emergency Phrases</h3>
+      <p>Medical, help, directions — pre-built and ready in one tap.</p>
+    </div>
+  </section>
+ 
+  <!-- ============ AUTH ============ -->
+  <section class="auth-section" id="authSection">
+    <div class="auth-wrap">
+      <div class="auth-side">
+        <h2>Built for two-way conversation</h2>
+        <p>Whether you sign, type, or just want to learn — SignBridge meets you where you are.</p>
+        <p style="margin-top:18px;">This is a UI preview. Accounts here are for demo purposes while the database connects behind the scenes.</p>
+      </div>
+      <div class="auth-form-wrap">
+        <div class="tabs">
+          <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Log in</button>
+          <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">Register</button>
+        </div>
+ 
+        <form id="formLogin" onsubmit="handleLogin(event)">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required>
+          <label for="loginPass">Password</label>
+          <input type="password" id="loginPass" placeholder="••••••••" required>
+          <p class="form-note" id="loginError" style="color:var(--coral);display:none;"></p>
+          <button class="btn btn-primary" style="width:100%;margin-top:22px;justify-content:center;" type="submit">Log in</button>
+          <p class="form-note" style="text-align:center;"><a href="#" onclick="showForgotForm(event)" style="color:var(--teal);font-weight:600;">Forgot password?</a></p>
+        </form>
+ 
+        <form id="formRegister" class="hidden" onsubmit="handleRegister(event)">
+          <label for="regName">Full name</label>
+          <input type="text" id="regName" placeholder="Your full name (first and last)" required>
+          <p class="field-error" id="nameError"></p>
+          <label for="regRole">I am a</label>
+          <select id="regRole">
+            <option>Deaf / hard of hearing signer</option>
+            <option>Hearing user / learner</option>
+            <option>Interpreter or educator</option>
+          </select>
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder="you@example.com" required>
+          <p class="field-error" id="emailError"></p>
+          <label for="regPass">Password</label>
+          <input type="password" id="regPass" placeholder="Min 8 characters, 1 letter, 1 number, 1 symbol" required>
+          <p class="field-error" id="passwordError"></p>
+          <p class="form-note" id="registerError" style="color:var(--coral);display:none;"></p>
+          <button class="btn btn-primary" style="width:100%;margin-top:22px;justify-content:center;" type="submit">Create account</button>
+        </form>
+ 
+        <form id="formForgot" class="hidden" onsubmit="handleForgotPassword(event)">
+          <p class="form-note" style="margin-top:0;">Enter your account email and choose a new password.</p>
+          <label for="forgotEmail">Email</label>
+          <input type="email" id="forgotEmail" placeholder="you@example.com" required>
+          <p class="field-error" id="forgotEmailError"></p>
+          <label for="forgotNewPass">New password</label>
+          <input type="password" id="forgotNewPass" placeholder="Min 8 characters, 1 letter, 1 number, 1 symbol" required>
+          <p class="field-error" id="forgotPassError"></p>
+          <label for="forgotConfirmPass">Confirm new password</label>
+          <input type="password" id="forgotConfirmPass" placeholder="Re-enter new password" required>
+          <p class="field-error" id="forgotConfirmError"></p>
+          <p class="form-note" id="forgotError" style="color:var(--coral);display:none;"></p>
+          <p class="form-note" id="forgotSuccess" style="color:var(--teal);display:none;"></p>
+          <button class="btn btn-primary" style="width:100%;margin-top:22px;justify-content:center;" type="submit">Reset password</button>
+          <p class="form-note" style="text-align:center;"><a href="#" onclick="showLoginForm(event)" style="color:var(--teal);font-weight:600;">Back to log in</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard" class="hidden">
+  <div class="dash">
+    <nav class="sidebar" aria-label="Dashboard sections">
+      <button class="side-link" data-view="camera" onclick="showView('camera')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg></span>
+        <span class="label">Camera Translate</span>
+      </button>
+      <button class="side-link" data-view="chat" onclick="showView('chat')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/></svg></span>
+        <span class="label">Text Chat</span>
+      </button>
+      <button class="side-link" data-view="library" onclick="showView('library')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1v13c3-1 6-.5 8 1 2-1.5 5-2 8-1V5c-3-1-6-.5-8 1z"/><line x1="12" y1="6" x2="12" y2="19"/></svg></span>
+        <span class="label">Phrase Library</span>
+      </button>
+      <button class="side-link emergency-link" data-view="emergency" onclick="showView('emergency')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg></span>
+        <span class="label">Emergency</span>
+      </button>
+      <button class="side-link" data-view="practice" onclick="showView('practice')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></span>
+        <span class="label">Practice Mode</span>
+      </button>
+      <button class="side-link" data-view="history" onclick="showView('history')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+        <span class="label">History Log</span>
+      </button>
+      <button class="side-link" data-view="settings" onclick="showView('settings')">
+        <span class="badge sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2.2" fill="var(--paper)"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2.2" fill="var(--paper)"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="11" cy="18" r="2.2" fill="var(--paper)"/></svg></span>
+        <span class="label">Accessibility</span>
+      </button>
+      <div class="side-foot">Signed in as <span id="sideUserName">demo_user</span><br>SignBridge UI preview</div>
+    </nav>
+ 
+    <main class="main">
+ 
+      <!-- CAMERA TRANSLATE -->
+      <section class="view" id="view-camera">
+        <h2>Camera Translate</h2>
+        <p class="sub">Capture one photo per gesture, in order — some sentences need more than one. We'll build the full sentence as you go.</p>
+        <div class="camera-grid">
+          <div>
+            <div class="camera-frame" id="cameraFrame">
+              <div class="placeholder" id="cameraPlaceholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>
+                <span>Camera is off</span>
+              </div>
+              <video id="cameraVideo" class="hidden" autoplay playsinline></video>
+              <canvas id="captureCanvas" class="hidden"></canvas>
+              <div class="countdown-overlay hidden" id="countdownOverlay">
+                <span id="countdownNumber">5</span>
+              </div>
+            </div>
+            <div class="camera-controls">
+              <button class="btn btn-primary" id="camToggleBtn" onclick="toggleCamera()">Start camera</button>
+              <button class="btn btn-primary hidden" id="captureBtn" onclick="startCaptureCountdown()">Capture gesture (5s timer)</button>
+              <button class="btn btn-ghost hidden" id="clearSentenceBtn" onclick="clearSentence()">Clear sentence</button>
+            </div>
+            <div class="photo-strip" id="photoStrip"></div>
+          </div>
+          <div class="output-panel">
+            <h3>Sentence so far</h3>
+            <div class="output-text" id="outputText">Capture a photo to see its meaning<span class="cursor"></span></div>
+            <p style="font-size:12px;color:var(--ink-soft);margin:0;">Each captured gesture adds one word or phrase — capture as many as your sentence needs, in order.</p>
+          </div>
+        </div>
+      </section>
+ 
+      <!-- TEXT CHAT -->
+      <section class="view hidden" id="view-chat">
+        <h2>Text Chat</h2>
+        <p class="sub">Anyone who can read and write can reply here directly — no signing required.</p>
+        <div class="chat-wrap">
+          <div class="chat-log" id="chatLog">
+            <div class="bubble them">Hi! I saw you signing earlier — how can I help?<span class="t">11:02</span></div>
+            <div class="bubble me">Can you show me where the pharmacy is?<span class="t">11:03</span></div>
+            <div class="bubble them">Sure, it's two blocks down on the left, next to the bakery.<span class="t">11:03</span></div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendChat()">
+            <button class="btn btn-primary" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+      </section>
+ 
+      <!-- PHRASE LIBRARY -->
+      <section class="view hidden" id="view-library">
+        <h2>Phrase Library</h2>
+        <p class="sub">Common everyday lines as gesture blocks — tap a block to preview the sign.</p>
+        <div class="filter-row" id="filterRow">
+          <button class="chip active" data-cat="all" onclick="filterLibrary('all')">All</button>
+          <button class="chip" data-cat="greetings" onclick="filterLibrary('greetings')">Greetings</button>
+          <button class="chip" data-cat="food" onclick="filterLibrary('food')">Food</button>
+          <button class="chip" data-cat="weather" onclick="filterLibrary('weather')">Weather</button>
+          <button class="chip" data-cat="daily" onclick="filterLibrary('daily')">Daily Life</button>
+        </div>
+        <div class="grid-cards" id="libraryGrid"></div>
+      </section>
+ 
+      <!-- EMERGENCY -->
+      <section class="view hidden" id="view-emergency">
+        <h2>Emergency Phrases</h2>
+        <p class="sub">Pre-built, one-tap blocks for urgent situations.</p>
+        <div class="emergency-grid" id="emergencyGrid"></div>
+        <div class="em-confirm" id="emConfirm"></div>
+      </section>
+ 
+      <!-- PRACTICE -->
+      <section class="view hidden" id="view-practice">
+        <h2>Practice Mode</h2>
+        <p class="sub">Learn a phrase, try the gesture on camera, get feedback.</p>
+        <div class="practice-card">
+          <div class="tag" style="font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;">Today's phrase</div>
+          <div class="phrase-target" id="practicePhrase">What do you want to eat?</div>
+          <div class="gesture-preview">
+            <svg width="60" height="60" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 26V13a2.4 2.4 0 0 1 4.8 0v9"/><path d="M18.8 22V9.5a2.4 2.4 0 0 1 4.8 0V22"/><path d="M23.6 22V11a2.4 2.4 0 0 1 4.8 0v11"/><path d="M28.4 22.5v-6a2.4 2.4 0 0 1 4.8 0v11c0 6-4.6 11-11 11-3.6 0-5.8-1.4-7.6-3.6L9 27.4a2.3 2.3 0 0 1 3.4-3.1l1.6 1.6"/></svg>
+          </div>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="tryOnCamera()">Try it in front of camera</button>
+          <div class="practice-actions">
+            <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="markPractice(true)">Mark correct</button>
+            <button class="btn btn-ghost" style="flex:1;justify-content:center;" onclick="markPractice(false)">Try again</button>
+          </div>
+          <div class="feedback" id="practiceFeedback"></div>
+          <div class="streak">🔥 <span id="streakCount">3</span>-phrase streak this week</div>
+        </div>
+      </section>
+ 
+      <!-- HISTORY -->
+      <section class="view hidden" id="view-history">
+        <h2>History Log</h2>
+        <p class="sub">Your past translations, pulled from your account.</p>
+        <table>
+          <thead><tr><th>Date</th><th>Type</th><th>Original</th><th>Translated</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </section>
+ 
+      <!-- SETTINGS -->
+      <section class="view hidden" id="view-settings">
+        <h2>Accessibility Settings</h2>
+        <p class="sub">Adjust the interface to what's comfortable for you.</p>
+ 
+        <div class="settings-card">
+          <div class="switch-row">
+            <div>
+              <h3>High contrast mode</h3>
+              <p>Stronger contrast between text and background.</p>
+            </div>
+            <button class="switch" id="contrastSwitch" onclick="toggleContrast()" aria-pressed="false" aria-label="Toggle high contrast mode"></button>
+          </div>
+        </div>
+ 
+        <div class="settings-card">
+          <h3>Text size</h3>
+          <p>Scales text across the whole app.</p>
+          <input type="range" min="0" max="3" step="1" value="0" id="fontSlider" oninput="setFontScale(this.value)">
+          <div class="scale-labels"><span>Default</span><span>Large</span><span>Larger</span><span>Largest</span></div>
+        </div>
+      </section>
+ 
+    </main>
+  </div>
+</div>
+ 
+<div class="gesture-modal hidden" id="gestureModal" onclick="if(event.target===this)closeGestureModal()">
+  <div class="gesture-modal-card">
+    <button class="gesture-modal-close" onclick="closeGestureModal()" aria-label="Close preview">×</button>
+    <p id="gestureModalCaption" class="gesture-modal-caption"></p>
+    <img id="gestureModalImg" class="gesture-modal-img hidden" alt="Gesture preview">
+    <div id="gestureModalEmpty" class="gesture-modal-empty hidden">
+      No gesture image saved for this phrase yet.
+    </div>
+  </div>
+</div>
+ 
+<script src="script.js"></script>
+</body>
+</html>
+ 
